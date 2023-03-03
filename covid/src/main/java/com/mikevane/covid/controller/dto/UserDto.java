@@ -1,0 +1,25 @@
+package com.mikevane.covid.controller.dto;
+
+import lombok.Data;
+
+/**
+ * 用于接收前端请求的参数
+ * @author: whb
+ * @date: 2023-03-01-14-32
+ * @version: 1.0
+ */
+@Data
+public class UserDto {
+    /**
+     * 用户名
+     */
+    private String username;
+    /**
+     * 用户密码
+     */
+    private String password;
+    /**
+     * 用户身份
+     */
+    private String identity;
+}
