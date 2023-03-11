@@ -12,12 +12,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/depart")
 public class DepartController {
+    private DepartService departService;
 
     @Autowired
-    DepartService service;
+    public void setDepartService(DepartService departService) {
+        this.departService = departService;
+    }
 
     @GetMapping("/findAll")
     private List<String>  findAll(){
-       return service.getAll();
+       return departService.getAll();
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+        >
+<mapper namespace="com.mikevane.covid.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.mikevane.covid.entity.User">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="identity" column="identity" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,username,password,
+        email,identity,create_time,
+        update_time
+    </sql>
+
+    <select id="findByUser"
+            resultType="com.mikevane.covid.entity.User"
+            parameterType="com.mikevane.covid.entity.User">
+        select * from user
+        <where>
+            <if test="user.username != null">
+                and username = #{user.username}
+            </if>
+            <if test="user.password != null">
+                and password = #{user.password}
+            </if>
+            <if test="user.identity != null">
+                and identity = #{user.identity}
+            </if>
+            <if test="user.email != null">
+                and email = #{user.email}
+            </if>
+        </where>
+    </select>
+</mapper>

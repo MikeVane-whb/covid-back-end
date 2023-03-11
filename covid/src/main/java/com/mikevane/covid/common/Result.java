@@ -45,11 +45,11 @@ public class Result<T> {
      * @param <T>
      */
     public static <T> Result<T> success(T data){
-        return new Result<T>(HttpConstant.SUCCESS_CODE,"",data,null);
+        return new Result<T>(ErrorCodeEnum.SUCCESS.getCode(),ErrorCodeEnum.SUCCESS.getMsg(),data,null);
     }
 
     public static <T> Result<T> success(){
-        return new Result<T>(HttpConstant.SUCCESS_CODE,"",null,null);
+        return new Result<T>(ErrorCodeEnum.SUCCESS.getCode(),ErrorCodeEnum.SUCCESS.getMsg(),null,null);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Result<T> {
     }
 
     public static <T> Result<T> error(){
-        return new Result<T>(HttpConstant.SERVER_ERROR,"系统错误",null,null);
+        return new Result<T>(ErrorCodeEnum.SERVER_ERROR.getCode(),ErrorCodeEnum.SERVER_ERROR.getMsg(),null,null);
     }
 
     public Result<T> add(String key, Object value){

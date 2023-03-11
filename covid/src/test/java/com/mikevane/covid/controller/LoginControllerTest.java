@@ -9,11 +9,11 @@ import org.springframework.util.DigestUtils;
 
 
 @SpringBootTest
-class LoginServiceTest {
+public class LoginControllerTest {
     @Autowired
-private UserMapper mapper;
+    private UserMapper mapper;
     @Test
-    void register(){
+    public void register(){
         User user=new User();
         String pw=DigestUtils.md5DigestAsHex("99409".getBytes());
         user.setUsername("994091246");
@@ -21,4 +21,5 @@ private UserMapper mapper;
         int message= mapper.insert(user);
         System.out.println(message);
     }
+
 }
