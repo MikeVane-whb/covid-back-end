@@ -39,10 +39,15 @@ public class TeacherController {
                                      @RequestParam("pageSize") Integer pageSize,
                                      @RequestParam(value = "studentName",required = false) String studentName){
         IPage<Student> pages = teacherService.getPagesByTeacherId(5,pageNum,pageSize);
-        if(pages == null){
-            return Result.error(ErrorCodeEnum.PAGE_ERROR.getCode(),ErrorCodeEnum.PAGE_ERROR.getMsg());
-        }
-        return Result.success(pages);
+        return pages == null
+                ? Result.error(ErrorCodeEnum.PAGE_ERROR.getCode(),ErrorCodeEnum.PAGE_ERROR.getMsg())
+                : Result.success(pages);
+    }
+
+    @GetMapping("selectStudents.do/{teacherId}")
+    public Result selectStudents(@PathVariable Integer teacherId){
+        List<Student> students = teacherService.getOthersStuByTeacherId(teacherId);
+        return Result.success(students);
     }
 
     @PostMapping("/manage/update.do")

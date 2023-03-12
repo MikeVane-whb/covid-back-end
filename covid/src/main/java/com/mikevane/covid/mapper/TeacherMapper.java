@@ -1,9 +1,12 @@
 package com.mikevane.covid.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mikevane.covid.entity.Student;
 import com.mikevane.covid.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author MikeV
@@ -14,6 +17,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface TeacherMapper extends BaseMapper<Teacher> {
 
+    List<Student> selectOthersStudents(@Param("teacherId") Integer teacherId);
 }
 
 

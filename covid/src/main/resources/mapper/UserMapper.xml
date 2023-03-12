@@ -25,8 +25,8 @@
             parameterType="com.mikevane.covid.entity.User">
         select * from user
         <where>
-            <if test="user.username != null">
-                and username = #{user.username}
+            <if test="user.phone != null">
+                and phone = #{user.phone}
             </if>
             <if test="user.password != null">
                 and password = #{user.password}

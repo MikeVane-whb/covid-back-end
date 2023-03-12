@@ -44,6 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User login(UserDto userDto) {
+        // 防空处理,防止别人通过接口直接发送请求
         if (!ObjectUtil.checkObjAllFieldsIsNotNull(userDto)){
             throw new ServiceException(ErrorCodeEnum.ILLEGAL_ERROR.getCode(),ErrorCodeEnum.ILLEGAL_ERROR.getMsg());
         }
@@ -52,6 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
         BeanUtils.copyProperties(userDto,user);
         List<User> users = userMapper.findByUser(user);
+        // 如果没有该用户，或者查询到的用户数量大于1，则抛出异常
         if(users.size() == 0 || users.size() > 1){
             throw new ServiceException(ErrorCodeEnum.PASSWORD_ERROR.getCode(), ErrorCodeEnum.PASSWORD_ERROR.getMsg());
         }
@@ -66,8 +68,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         User user = new User();
         userRegisterDto.setPassword(DigestUtils.md5DigestAsHex(userRegisterDto.getPassword().getBytes()));
+        // 属性拷贝
         BeanUtils.copyProperties(userRegisterDto,user);
-        List<User> users = userMapper.findByUser(new User(null,user.getUsername(),user.getIdentity()));
+        // 查找 user 信息
+        List<User> users = userMapper.findByUser(new User(null,user.getPhone(),user.getIdentity()));
         // 用户已存在，拒绝注册
         if(users.size() > 0){
             throw new ServiceException(ErrorCodeEnum.USER_IS_EXIST.getCode(), ErrorCodeEnum.USER_IS_EXIST.getMsg());
@@ -76,9 +80,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(user.getIdentity().equals("学生")){
             Student student = new Student();
             BeanUtils.copyProperties(user,student);
+            // 信息插入用户表
             userMapper.insert(user);
+            // 设置 id 与 name
             student.setUserId(user.getId());
-            student.setUsername(user.getUsername());
+            student.setUsername(user.getPhone());
+            // 信息插入学生表
             studentMapper.insert(student);
             return student;
         }
@@ -86,9 +93,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(user.getIdentity().equals("老师")){
             Teacher teacher = new Teacher();
             BeanUtils.copyProperties(user,teacher);
+            // 信息插入用户表
             userMapper.insert(user);
+            // 设置 id 与 name
             teacher.setUserId(user.getId());
-            teacher.setUsername(user.getUsername());
+            teacher.setUsername(user.getPhone());
+            // 信息插入老师表
             teacherMapper.insert(teacher);
             return teacher;
         }

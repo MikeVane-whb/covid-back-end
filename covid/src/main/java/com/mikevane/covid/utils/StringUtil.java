@@ -2,6 +2,8 @@ package com.mikevane.covid.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
+import java.util.regex.Pattern;
+
 /**
  * 字符串工具类
  * @author: whb
@@ -18,6 +20,13 @@ public class StringUtil {
     public static boolean isNull(String string){
         if (string == null || StringUtils.isBlank(string)){
             return true;
+        }
+        return false;
+    }
+
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        if ((phoneNumber != null) && (!phoneNumber.isEmpty())) {
+            return Pattern.matches("^1[3-9]\\d{9}$", phoneNumber);
         }
         return false;
     }

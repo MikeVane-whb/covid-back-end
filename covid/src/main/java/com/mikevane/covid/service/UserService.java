@@ -19,12 +19,10 @@ public interface UserService extends IService<User> {
 
     /**
      * 注册功能
-     * @param user 传入用户信息
-     * @return
-     *      如果用户信息为空则返回 "error" 信息
-     *      如果用户已存在则返回 "repeat" 信息
-     *      如果插入成功则返回 "success" 信息
+     * @param userRegisterDto 传入注册用户信息
+     * @return 如果注册成功则返回对象，否则返回 null
+     *
      */
-    public Object register(UserRegisterDto user);
+    public Object register(UserRegisterDto userRegisterDto);
 
 }

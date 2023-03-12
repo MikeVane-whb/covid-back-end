@@ -22,6 +22,11 @@ public class Student implements Serializable {
     private Integer id;
 
     /**
+     * 学号
+     */
+    private String stuNumber;
+
+    /**
      * 学生姓名
      */
     private String username;
@@ -45,9 +50,6 @@ public class Student implements Serializable {
      * 学生对应的 用户id
      */
     private Integer userId;
-
-
-
 
     /**
      * 学生用户创建时间

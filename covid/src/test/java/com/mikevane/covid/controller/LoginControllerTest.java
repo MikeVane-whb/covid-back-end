@@ -16,7 +16,7 @@ public class LoginControllerTest {
     public void register(){
         User user=new User();
         String pw=DigestUtils.md5DigestAsHex("99409".getBytes());
-        user.setUsername("994091246");
+//        user.setUsername("994091246");
         user.setPassword(pw);
         int message= mapper.insert(user);
         System.out.println(message);

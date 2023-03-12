@@ -10,9 +10,9 @@ import lombok.Data;
 @Data
 public class UserRegisterDto {
     /**
-     * 用户名
+     * 用户手机号
      */
-    private String username;
+    private String phone;
     /**
      * 用户密码
      */

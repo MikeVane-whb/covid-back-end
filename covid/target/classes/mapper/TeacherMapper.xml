@@ -21,4 +21,20 @@
         insert into teacher (username, user_id)
         values (#{teacher.username},#{teacher.userId})
     </insert>
+
+    <select id="selectOthersStudents" resultType="com.mikevane.covid.entity.Student">
+        SELECT
+            *
+        FROM
+            student AS stu
+        WHERE
+            stu.id NOT IN (
+            SELECT
+                ts.id
+            FROM
+                teacher_student AS ts
+            WHERE
+                ts.teacher_id = #{teacherId})
+    </select>
+
 </mapper>

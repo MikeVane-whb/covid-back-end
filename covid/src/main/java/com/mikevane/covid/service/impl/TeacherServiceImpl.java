@@ -31,20 +31,29 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher>
     private TeacherStudentMapper teacherStudentMapper;
     @Autowired
     private StudentMapper studentMapper;
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     @Override
     public IPage<Student> getPagesByTeacherId(Integer teacherId, Integer pageNum, Integer pageSize) {
         QueryWrapper<TeacherStudent> teacherStudentQueryWrapper = new QueryWrapper<>();
         List<Integer> list = new ArrayList<>();
+        // 设置查询的teacher_id
         teacherStudentQueryWrapper.eq("teacher_id",5);
+        // 查询老师管理的学生 id
         List<TeacherStudent> teacherStudentList = teacherStudentMapper.selectList(teacherStudentQueryWrapper);
-        teacherStudentList.forEach((teacherStudent) -> {
-            list.add(teacherStudent.getStudentId());
-        });
+        teacherStudentList.forEach((teacherStudent) -> {list.add(teacherStudent.getStudentId());});
+        // 通过学生 id 进行分页查询学生信息
         IPage<Student> studentIPage = new Page<>(pageNum,pageSize);
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.in("id",list);
         return studentMapper.selectPage(studentIPage, studentQueryWrapper);
+    }
+
+    @Override
+    public List<Student> getOthersStuByTeacherId(Integer teacherId) {
+        List<Student> students = teacherMapper.selectOthersStudents(teacherId);
+        return null;
     }
 }
 

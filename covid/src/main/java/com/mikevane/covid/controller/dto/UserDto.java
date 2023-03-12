@@ -11,9 +11,9 @@ import lombok.Data;
 @Data
 public class UserDto {
     /**
-     * 用户名
+     * 手机号
      */
-    private String username;
+    private String phone;
     /**
      * 用户密码
      */

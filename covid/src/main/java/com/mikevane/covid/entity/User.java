@@ -21,9 +21,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class User implements Serializable {
 
-    public User(Integer id,String username, String identity){
+    public User(Integer id,String phone, String identity){
         this.id = id;
-        this.username = username;
+        this.phone = phone;
         this.identity = identity;
     }
 
@@ -34,9 +34,9 @@ public class User implements Serializable {
     private Integer id;
 
     /**
-     * 用户名
+     * 用户电话
      */
-    private String username;
+    private String phone;
 
     /**
      * 用户密码
