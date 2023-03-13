@@ -30,7 +30,7 @@
         WHERE
             stu.id NOT IN (
             SELECT
-                ts.id
+                ts.student_id
             FROM
                 teacher_student AS ts
             WHERE

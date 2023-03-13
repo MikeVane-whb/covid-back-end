@@ -12,6 +12,7 @@ import com.mikevane.covid.mapper.StudentMapper;
 import com.mikevane.covid.mapper.TeacherMapper;
 import com.mikevane.covid.mapper.TeacherStudentMapper;
 import com.mikevane.covid.service.TeacherService;
+import com.mikevane.covid.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher>
     private TeacherMapper teacherMapper;
 
     @Override
-    public IPage<Student> getPagesByTeacherId(Integer teacherId, Integer pageNum, Integer pageSize) {
+    public IPage<Student> getPagesByTeacherId(Integer teacherId, Integer pageNum, Integer pageSize, String studentName) {
         QueryWrapper<TeacherStudent> teacherStudentQueryWrapper = new QueryWrapper<>();
         List<Integer> list = new ArrayList<>();
         // 设置查询的teacher_id
@@ -47,13 +48,16 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher>
         IPage<Student> studentIPage = new Page<>(pageNum,pageSize);
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.in("id",list);
+        // 模糊查询 studentName
+        if (!StringUtil.isNull(studentName)){
+            studentQueryWrapper.like("username",studentName);
+        }
         return studentMapper.selectPage(studentIPage, studentQueryWrapper);
     }
 
     @Override
     public List<Student> getOthersStuByTeacherId(Integer teacherId) {
-        List<Student> students = teacherMapper.selectOthersStudents(teacherId);
-        return null;
+        return teacherMapper.selectOthersStudents(teacherId);
     }
 }
 

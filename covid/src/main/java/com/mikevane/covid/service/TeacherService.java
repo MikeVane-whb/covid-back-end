@@ -19,9 +19,10 @@ public interface TeacherService extends IService<Teacher> {
      * @param teacherId 老师 id
      * @param pageNum 页码
      * @param pageSize 一页中有多少条数据
+     * @param studentName 模糊查询 studentName
      * @return 查询成功则返回 IPage 对象
      */
-    public IPage<Student> getPagesByTeacherId(Integer teacherId, Integer pageNum, Integer pageSize);
+    public IPage<Student> getPagesByTeacherId(Integer teacherId, Integer pageNum, Integer pageSize, String studentName);
 
     /**
      * 查找与 teacherId 没有关系的学生
