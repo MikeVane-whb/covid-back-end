@@ -40,9 +40,12 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher>
         QueryWrapper<TeacherStudent> teacherStudentQueryWrapper = new QueryWrapper<>();
         List<Integer> list = new ArrayList<>();
         // 设置查询的teacher_id
-        teacherStudentQueryWrapper.eq("teacher_id",5);
+        teacherStudentQueryWrapper.eq("teacher_id",teacherId);
         // 查询老师管理的学生 id
         List<TeacherStudent> teacherStudentList = teacherStudentMapper.selectList(teacherStudentQueryWrapper);
+        if (teacherStudentList == null || teacherStudentList.size() < 1){
+            return new Page<>();
+        }
         teacherStudentList.forEach((teacherStudent) -> {list.add(teacherStudent.getStudentId());});
         // 通过学生 id 进行分页查询学生信息
         IPage<Student> studentIPage = new Page<>(pageNum,pageSize);
@@ -58,6 +61,14 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher>
     @Override
     public List<Student> getOthersStuByTeacherId(Integer teacherId) {
         return teacherMapper.selectOthersStudents(teacherId);
+    }
+
+    @Override
+    public boolean deleteByTeacherIdAndStuId(Integer teacherId, Integer studentId) {
+        QueryWrapper<TeacherStudent> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("teacher_id",teacherId);
+        queryWrapper.eq("student_id",studentId);
+        return teacherStudentMapper.delete(queryWrapper) >= 1 ? true : false;
     }
 }
 

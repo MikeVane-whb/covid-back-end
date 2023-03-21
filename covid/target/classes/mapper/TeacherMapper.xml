@@ -23,18 +23,10 @@
     </insert>
 
     <select id="selectOthersStudents" resultType="com.mikevane.covid.entity.Student">
-        SELECT
-            *
-        FROM
-            student AS stu
-        WHERE
-            stu.id NOT IN (
-            SELECT
-                ts.id
-            FROM
-                teacher_student AS ts
-            WHERE
-                ts.teacher_id = #{teacherId})
+        SELECT s.*
+        FROM student s
+        LEFT JOIN teacher_student ts ON ts.student_id = s.id AND ts.teacher_id = #{teacherId}
+        WHERE ts.teacher_id IS NULL;
     </select>
 
 </mapper>

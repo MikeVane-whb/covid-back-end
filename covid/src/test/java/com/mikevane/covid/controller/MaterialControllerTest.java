@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.mikevane.covid.entity.EmpIden;
 
 import com.mikevane.covid.mapper.EmpIdenMapper;
-import com.mikevane.covid.vo.LineVO;
+import com.mikevane.covid.controller.vo.LineVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

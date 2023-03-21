@@ -1,5 +1,6 @@
 package com.mikevane.covid.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**
@@ -15,6 +16,10 @@ public class UserDto {
      */
     private String phone;
     /**
+     * 用户姓名
+     */
+    private String username;
+    /**
      * 用户密码
      */
     private String password;
@@ -22,4 +27,8 @@ public class UserDto {
      * 用户身份
      */
     private String identity;
+    /**
+     * token
+     */
+    private String token;
 }

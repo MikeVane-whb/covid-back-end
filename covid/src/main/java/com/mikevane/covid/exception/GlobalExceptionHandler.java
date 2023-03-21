@@ -1,5 +1,6 @@
 package com.mikevane.covid.exception;
 
+import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,6 +24,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     @ResponseBody
     public Result serviceExceptionHandle(ServiceException serviceException){
+        log.error(serviceException.getMessage());
         return Result.error(serviceException.getCode(), serviceException.getMessage());
     }
 
@@ -30,6 +32,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result nullPointerHandler(NullPointerException nullPointerException){
         log.error("空指针异常");
-        return Result.error();
+        log.error(nullPointerException.getMessage());
+        return Result.error(ErrorCodeEnum.NULL_POINTER_ERROR.getCode(), ErrorCodeEnum.NULL_POINTER_ERROR.getMsg());
     }
 }

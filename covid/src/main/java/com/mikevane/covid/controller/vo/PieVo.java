@@ -1,4 +1,4 @@
-package com.mikevane.covid.vo;
+package com.mikevane.covid.controller.vo;
 
 import lombok.Data;
 

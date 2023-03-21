@@ -17,4 +17,5 @@ public interface UserMapper extends BaseMapper<User> {
 
     public List<User> findByUser(@Param("user") User user);
 
+
 }

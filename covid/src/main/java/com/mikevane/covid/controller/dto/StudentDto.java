@@ -7,9 +7,9 @@ package com.mikevane.covid.controller.dto;
  */
 public class StudentDto {
     /**
-     * 用户id
+     * 学生姓名
      */
-    private Integer id;
+    private String username;
 
     /**
      * 学号
@@ -17,14 +17,10 @@ public class StudentDto {
     private String stuNumber;
 
     /**
-     * 学生姓名
+     * 学生邮箱
      */
-    private String username;
+    private String email;
 
-    /**
-     * 学生手机号
-     */
-    private String phone;
     /**
      * 学生地址
      */

@@ -32,6 +32,11 @@ public class Student implements Serializable {
     private String username;
 
     /**
+     * 学生邮箱
+     */
+    private String email;
+
+    /**
      * 学生地址
      */
     private String address;

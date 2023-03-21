@@ -7,13 +7,13 @@ package com.mikevane.covid.common;
  * @version: 1.0
  */
 public class BaseContext {
-    private static ThreadLocal<Long> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
 
-    public static void setCurrentId(Long id){
+    public static void setCurrentId(Integer id){
         threadLocal.set(id);
     }
 
-    public static Long getCurrentId(){
+    public static Integer getCurrentId(){
         return threadLocal.get();
     }
 }

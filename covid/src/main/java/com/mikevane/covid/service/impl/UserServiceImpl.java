@@ -3,6 +3,7 @@ package com.mikevane.covid.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mikevane.covid.common.BaseContext;
 import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.UserDto;
@@ -17,12 +18,19 @@ import com.mikevane.covid.service.ChartService;
 import com.mikevane.covid.service.UserService;
 import com.mikevane.covid.utils.ObjectUtil;
 import com.mikevane.covid.utils.StringUtil;
+import com.mikevane.covid.utils.TokenUtil;
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import sun.security.provider.MD5;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -43,21 +51,45 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public void setTeacherMapper(TeacherMapper teacherMapper)  {this.teacherMapper = teacherMapper; }
 
     @Override
-    public User login(UserDto userDto) {
-        // 防空处理,防止别人通过接口直接发送请求
-        if (!ObjectUtil.checkObjAllFieldsIsNotNull(userDto)){
-            throw new ServiceException(ErrorCodeEnum.ILLEGAL_ERROR.getCode(),ErrorCodeEnum.ILLEGAL_ERROR.getMsg());
-        }
+    public UserDto login(HttpSession session, UserDto userDto) {
         User user = new User();
         // 将密码加密
         userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
         BeanUtils.copyProperties(userDto,user);
+
         List<User> users = userMapper.findByUser(user);
         // 如果没有该用户，或者查询到的用户数量大于1，则抛出异常
-        if(users.size() == 0 || users.size() > 1){
+        if(users == null || users.size() != 1){
             throw new ServiceException(ErrorCodeEnum.PASSWORD_ERROR.getCode(), ErrorCodeEnum.PASSWORD_ERROR.getMsg());
         }
-        return users.get(0);
+
+        user = users.get(0);
+        // 设置token
+        BeanUtils.copyProperties(user,userDto);
+        String token = TokenUtil.getToken(user.getId().toString(), user.getPassword());
+        userDto.setToken(token);
+
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_id",user.getId());
+        if("学生".equals(user.getIdentity())){
+            Student student = studentMapper.selectOne(queryWrapper);
+            // 设置姓名到dto
+            userDto.setUsername(student.getUsername());
+            // 将id放到请求中
+            session.setAttribute("studentId",student.getId());
+            BaseContext.setCurrentId(student.getId());
+            log.warn("登录成功，学生 id 为：" + student.getId());
+        }
+        else {
+            Teacher teacher = teacherMapper.selectOne(queryWrapper);
+            // 设置姓名到dto
+            userDto.setUsername(teacher.getUsername());
+            // 将id放到请求中
+            session.setAttribute("teacherId",teacher.getId());
+            log.warn("登录成功，老师 id 为：" + teacher.getId());
+        }
+        log.warn("token为：" + token);
+        return userDto;
     }
 
     @Override

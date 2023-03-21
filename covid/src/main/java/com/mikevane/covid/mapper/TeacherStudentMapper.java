@@ -13,7 +13,6 @@ import org.apache.ibatis.annotations.Param;
 */
 @Mapper
 public interface TeacherStudentMapper extends BaseMapper<TeacherStudent> {
-
 }
 
 

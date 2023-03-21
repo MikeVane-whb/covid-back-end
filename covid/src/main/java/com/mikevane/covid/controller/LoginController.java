@@ -9,10 +9,13 @@ import com.mikevane.covid.entity.User;
 import com.mikevane.covid.service.UserService;
 import com.mikevane.covid.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
@@ -26,25 +29,29 @@ public class LoginController {
     }
 
     @PostMapping("/login.do")
-    public Result<User> login(HttpServletRequest request,
-                              HttpServletResponse response,
+    public Result<UserDto> login(HttpServletResponse response,
+                                 HttpSession session,
                               @RequestBody UserDto userDto){
-        User user = userService.login(userDto);
-        request.getSession().setAttribute("userId", user.getId());
-        return Result.success();
+        UserDto user = userService.login(session,userDto);
+        String sessionId = session.getId();
+        Cookie cookie = new Cookie("JSESSIONID",sessionId);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        Result<UserDto> success = Result.success(user);
+//        success.add("session",session.getId());
+        return user == null ? Result.error() : success;
     }
 
     @PostMapping("/register.do")
-    public Result register(HttpServletRequest request,
-                           HttpServletResponse response,
+    public Result register(HttpSession session,
                            @RequestBody UserRegisterDto reUser){
         // 防止其他人使用接口直接发送注册请求
         if(!reUser.getPassword().equals(reUser.getRePassword())){
             return Result.error(ErrorCodeEnum.ILLEGAL_ERROR.getCode(), ErrorCodeEnum.ILLEGAL_ERROR.getMsg());
         }
-        if(!StringUtil.isValidPhoneNumber(reUser.getPhone())){
-            return Result.error(ErrorCodeEnum.ILLEGAL_ERROR.getCode(), ErrorCodeEnum.ILLEGAL_ERROR.getMsg());
-        }
+//        if(!StringUtil.isValidPhoneNumber(reUser.getPhone())){
+//            return Result.error(ErrorCodeEnum.ILLEGAL_ERROR.getCode(), ErrorCodeEnum.ILLEGAL_ERROR.getMsg());
+//        }
         Object register = userService.register(reUser);
         // 注册失败，发送错误信息
         if(register == null){

@@ -20,21 +20,27 @@ public class Teacher implements Serializable {
      */
     @TableId(type = IdType.AUTO)
     private Integer id;
-
     /**
      * 老师姓名
      */
     private String username;
 
     /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * 老师邮箱
+     */
+    private String email;
+
+    /**
      * 老师地址
      */
     private String address;
 
-    /**
-     * 性别
-     */
-    private String sex;
+
 
     /**
      * 老师的 userId

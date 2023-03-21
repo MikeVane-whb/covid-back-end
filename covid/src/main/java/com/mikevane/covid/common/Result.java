@@ -15,8 +15,6 @@ import java.util.Map;
  * @version: 1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Result<T> {
     /**
      * 响应码
@@ -36,7 +34,7 @@ public class Result<T> {
     /**
      * 动态数据
      */
-    private Map<String,Object> map = new HashMap();
+    private Map<String,Object> objectMap = new HashMap();
 
     /**
      * 响应成功
@@ -45,11 +43,18 @@ public class Result<T> {
      * @param <T>
      */
     public static <T> Result<T> success(T data){
-        return new Result<T>(ErrorCodeEnum.SUCCESS.getCode(),ErrorCodeEnum.SUCCESS.getMsg(),data,null);
+        Result<T> result = new Result();
+        result.data = data;
+        result.code = ErrorCodeEnum.SUCCESS.getCode();
+        result.msg = ErrorCodeEnum.SUCCESS.getMsg();
+        return result;
     }
 
     public static <T> Result<T> success(){
-        return new Result<T>(ErrorCodeEnum.SUCCESS.getCode(),ErrorCodeEnum.SUCCESS.getMsg(),null,null);
+        Result<T> result = new Result();
+        result.code = ErrorCodeEnum.SUCCESS.getCode();
+        result.msg = ErrorCodeEnum.SUCCESS.getMsg();
+        return result;
     }
 
     /**
@@ -60,15 +65,20 @@ public class Result<T> {
      * @param <T>
      */
     public static <T> Result<T> error(String code,String msg){
-        return new Result<T>(code,msg,null,null);
+        Result<T> result = new Result();
+        result.code = code;
+        result.msg = msg;
+        return result;
     }
 
-    public static <T> Result<T> error(){
-        return new Result<T>(ErrorCodeEnum.SERVER_ERROR.getCode(),ErrorCodeEnum.SERVER_ERROR.getMsg(),null,null);
+    public static <T> Result<T> error() {
+        Result<T> result = new Result();
+        result.code = ErrorCodeEnum.SERVER_ERROR.getCode();
+        result.msg = ErrorCodeEnum.SERVER_ERROR.getMsg();
+        return result;
     }
 
-    public Result<T> add(String key, Object value){
-        map.put(key,value);
-        return this;
+    public void add(String key, Object value){
+        this.objectMap.put(key,value);
     }
 }

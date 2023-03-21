@@ -30,4 +30,12 @@ public interface TeacherService extends IService<Teacher> {
      * @return 如果查找到学生则返回学生集合，否则抛出异常
      */
     List<Student> getOthersStuByTeacherId(Integer teacherId);
+
+    /**
+     * 删除老师与学生的关系
+     * @param teacherId
+     * @param studentId
+     * @return
+     */
+    boolean deleteByTeacherIdAndStuId(Integer teacherId, Integer studentId);
 }
