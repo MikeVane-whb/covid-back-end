@@ -1,27 +1,16 @@
 package com.mikevane.covid.controller.teacher;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.mikevane.covid.common.BaseContext;
-import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.common.Result;
-import com.mikevane.covid.controller.dto.StudentDto;
 import com.mikevane.covid.controller.dto.TeacherDto;
-import com.mikevane.covid.entity.Student;
 import com.mikevane.covid.entity.Teacher;
-import com.mikevane.covid.entity.TeacherStudent;
-import com.mikevane.covid.service.StudentService;
 import com.mikevane.covid.service.TeacherService;
-import com.mikevane.covid.service.TeacherStudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * @author: whb

@@ -6,7 +6,6 @@ import com.mikevane.covid.common.Result;
 import com.mikevane.covid.entity.Student;
 import com.mikevane.covid.entity.TeacherStudent;
 import com.mikevane.covid.service.StudentService;
-import com.mikevane.covid.service.TeacherService;
 import com.mikevane.covid.service.TeacherStudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

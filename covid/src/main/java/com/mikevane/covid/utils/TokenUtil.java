@@ -8,7 +8,6 @@ package com.mikevane.covid.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.mikevane.covid.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

@@ -3,7 +3,6 @@ package com.mikevane.covid.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mikevane.covid.entity.TeacherStudent;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 /**
 * @author MikeV

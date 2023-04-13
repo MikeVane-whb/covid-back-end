@@ -5,15 +5,14 @@ import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.UserDto;
 import com.mikevane.covid.controller.dto.UserRegisterDto;
-import com.mikevane.covid.entity.User;
 import com.mikevane.covid.service.UserService;
-import com.mikevane.covid.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 

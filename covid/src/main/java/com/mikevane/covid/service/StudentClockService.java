@@ -1,6 +1,5 @@
 package com.mikevane.covid.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mikevane.covid.controller.dto.StudentClockDto;
 import com.mikevane.covid.controller.dto.TeacherClockDto;

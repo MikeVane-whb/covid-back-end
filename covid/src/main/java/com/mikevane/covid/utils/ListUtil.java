@@ -2,8 +2,6 @@ package com.mikevane.covid.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 
 /**

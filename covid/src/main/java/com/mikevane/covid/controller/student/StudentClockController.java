@@ -3,11 +3,8 @@ package com.mikevane.covid.controller.student;
 import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.StudentClockDto;
-import com.mikevane.covid.entity.StudentClock;
 import com.mikevane.covid.service.StudentClockService;
-import com.mikevane.covid.utils.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -1,6 +1,5 @@
 package com.mikevane.covid.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**

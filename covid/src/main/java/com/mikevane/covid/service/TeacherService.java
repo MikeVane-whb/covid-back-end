@@ -1,12 +1,7 @@
 package com.mikevane.covid.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.mikevane.covid.entity.Student;
 import com.mikevane.covid.entity.Teacher;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 
 /**
 * @author MikeV

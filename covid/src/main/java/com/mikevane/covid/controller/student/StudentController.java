@@ -6,16 +6,11 @@ import com.mikevane.covid.controller.dto.StudentDto;
 import com.mikevane.covid.controller.dto.UserRegisterDto;
 import com.mikevane.covid.entity.Student;
 import com.mikevane.covid.service.StudentService;
-import com.mikevane.covid.utils.ListUtil;
-import com.mikevane.covid.utils.ObjectUtil;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * @author: whb

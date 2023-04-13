@@ -1,15 +1,14 @@
 package com.mikevane.covid.controller.teacher;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.TeacherClockDto;
 import com.mikevane.covid.service.StudentClockService;
-import com.mikevane.covid.service.TeacherStudentService;
-import com.mikevane.covid.utils.ListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**

@@ -91,7 +91,7 @@ public enum ErrorCodeEnum {
     }
 
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return "ErrorCodeEnum{" + "code='" + code + '\'' + ", msg='" + msg + '\'' + '}';
     }
 }

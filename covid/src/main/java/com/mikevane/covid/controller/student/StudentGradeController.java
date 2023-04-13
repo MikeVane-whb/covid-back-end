@@ -5,11 +5,12 @@ import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.StudentGradeDto;
 import com.mikevane.covid.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * @author: whb
