@@ -38,7 +38,6 @@ public class LoginController {
         cookie.setPath("/");
         response.addCookie(cookie);
         Result<UserDto> success = Result.success(user);
-//        success.add("session",session.getId());
         return user == null ? Result.error() : success;
     }
 
