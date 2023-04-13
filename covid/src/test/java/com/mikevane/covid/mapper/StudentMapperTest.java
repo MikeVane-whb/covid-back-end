@@ -1,13 +1,19 @@
 package com.mikevane.covid.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.mikevane.covid.controller.dto.TeacherClockDto;
 import com.mikevane.covid.entity.Student;
+import com.mikevane.covid.entity.StudentClock;
+import com.mikevane.covid.utils.ListUtil;
+import com.mikevane.covid.utils.TimeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * @author: whb
@@ -33,9 +39,16 @@ public class StudentMapperTest {
     public void updateTest(){
         Student student = new Student();
         student.setId(5);
-        student.setAddress("重庆邮电大学");
         student.setGradeClass("340719031");
-        student.setUpdateTime(LocalDateTime.now());
-        studentMapper.updateByStudent(student);
     }
+
+    @Test
+    public void selectDistinctGradesTest(){
+        List<String> stringList = studentMapper.selectDistinctGrades();
+        ListUtil.replaceElement(stringList,"","default");
+        log.info(Arrays.toString(stringList.toArray()));
+    }
+
+
+
 }

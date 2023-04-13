@@ -16,20 +16,29 @@
         id,username,user_id,
         create_time,update_time
     </sql>
-
-    <update id="updateByStudent" parameterType="com.mikevane.covid.entity.Student">
-        update student
-        <set>
-            <if test="student.address != null">
-                address = #{student.address}
-            </if>
-            <if test="student.gradeClass != null">
-                , grade_class = #{student.gradeClass}
-            </if>
-            <if test="student.updateTime != null">
-                , update_time = #{student.updateTime}
-            </if>
-        </set>
-        where id = #{student.id}
+    <update id="updatePasswordByid">
+        UPDATE USER
+        SET `password` = #{password}
+        WHERE
+                id = (
+                SELECT
+                    user_id
+                FROM
+                    student
+                WHERE
+                    id = #{studentId})
     </update>
+    <update id="updatePhoneById">
+        UPDATE `user`,`student`
+        SET USER.phone = #{phone},
+            student.phone = #{phone}
+        WHERE
+            USER.id = student.user_id
+            AND student.id = 7
+    </update>
+
+    <select id="selectDistinctGrades" resultType="java.lang.String">
+        SELECT DISTINCT grade_class from student
+    </select>
+
 </mapper>

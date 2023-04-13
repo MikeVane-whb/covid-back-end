@@ -37,7 +37,7 @@ public class LoginServiceTest {
         UserDto userDto = new UserDto();
         Student student = new Student();
         Teacher teacher = new Teacher();
-        userDto.setPhone("peter");
+        userDto.setPhone("1832222");
         userDto.setPassword("123");
         userDto.setIdentity("学生");
         BeanUtils.copyProperties(userDto, user);
@@ -50,6 +50,7 @@ public class LoginServiceTest {
         if (userDto.getIdentity().equals("学生")){
             student.setUserId(user.getId());
             student.setUsername(user.getPhone());
+            student.setPhone(userDto.getPhone());
             Integer insertByStudent = studentMapper.insert(student);
             if(insertByStudent == 0){
                 log.error("插入失败");

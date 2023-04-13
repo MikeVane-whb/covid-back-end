@@ -1,16 +1,21 @@
-package com.mikevane.covid.controller;
+package com.mikevane.covid.controller.student;
 
 import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.StudentDto;
+import com.mikevane.covid.controller.dto.UserRegisterDto;
 import com.mikevane.covid.entity.Student;
 import com.mikevane.covid.service.StudentService;
+import com.mikevane.covid.utils.ListUtil;
+import com.mikevane.covid.utils.ObjectUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author: whb
@@ -25,20 +30,33 @@ public class StudentController {
 
     @GetMapping("/select.do")
     public Result<StudentDto> select(HttpSession session){
-        StudentDto studentDto = new StudentDto();
         Student student = studentService.getById((Integer) session.getAttribute("studentId"));
+        StudentDto studentDto = new StudentDto();
         BeanUtils.copyProperties(student,studentDto);
         return Result.success(studentDto);
     }
 
     @PutMapping("/update.do")
-    public Result update(HttpSession session,
-                         @RequestBody StudentDto studentDto){
+    public Result<String> update(@RequestBody StudentDto studentDto){
         Student student = new Student();
         BeanUtils.copyProperties(studentDto,student);
-        student.setId((Integer) session.getAttribute("studentId"));
         return studentService.updateById(student)
                 ? Result.success()
                 : Result.error(ErrorCodeEnum.UPDATE_ERROR.getCode(), ErrorCodeEnum.UPDATE_ERROR.getMsg());
     }
+
+    @PutMapping("/updatePassword.do")
+    public Result<String> updatePassword(HttpSession session, @RequestBody UserRegisterDto userRegisterDto){
+        return studentService.updatePassword((Integer) session.getAttribute("studentId"), userRegisterDto)
+                ? Result.success()
+                : Result.error(ErrorCodeEnum.UPDATE_ERROR.getCode(), ErrorCodeEnum.UPDATE_ERROR.getMsg());
+    }
+
+    @PutMapping("/updatePhone.do")
+    public Result<String> updatePhone(HttpSession session, @RequestBody UserRegisterDto userRegisterDto){
+        return studentService.updatePhone((Integer) session.getAttribute("studentId"), userRegisterDto)
+                ? Result.success()
+                : Result.error(ErrorCodeEnum.UPDATE_ERROR.getCode(), ErrorCodeEnum.UPDATE_ERROR.getMsg());
+    }
+
 }

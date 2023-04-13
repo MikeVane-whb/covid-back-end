@@ -28,11 +28,26 @@ public class GlobalExceptionHandler {
         return Result.error(serviceException.getCode(), serviceException.getMessage());
     }
 
+    /**
+     * 捕获 ObjectException 异常
+     * @param objectException
+     * @return
+     */
+    @ExceptionHandler(ObjectException.class)
+    @ResponseBody
+    public Result objectExceptionHandle(ObjectException objectException){
+        log.error(objectException.getMessage());
+        if (objectException.getReason() != null){
+            log.error(objectException.getReason());
+        }
+        return Result.error(objectException.getCode(), objectException.getMessage());
+    }
+
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public Result nullPointerHandler(NullPointerException nullPointerException){
         log.error("空指针异常");
         log.error(nullPointerException.getMessage());
-        return Result.error(ErrorCodeEnum.NULL_POINTER_ERROR.getCode(), ErrorCodeEnum.NULL_POINTER_ERROR.getMsg());
+        return Result.error(ErrorCodeEnum.SERVER_ERROR.getCode(), ErrorCodeEnum.SERVER_ERROR.getMsg());
     }
 }
