@@ -27,7 +27,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @PostMapping("/login.do")
+    @PostMapping("/login")
     public Result<UserDto> login(HttpServletResponse response,
                                  HttpSession session,
                               @RequestBody UserDto userDto){
@@ -40,7 +40,7 @@ public class LoginController {
         return user == null ? Result.error() : success;
     }
 
-    @PostMapping("/register.do")
+    @PostMapping("/register")
     public Result register(HttpSession session,
                            @RequestBody UserRegisterDto reUser){
         // 防止其他人使用接口直接发送注册请求

@@ -43,7 +43,7 @@ public class TeacherManageController {
      * @param studentName 学生姓名
      * @return
      */
-    @GetMapping("/findStuPage.do")
+    @GetMapping("/findStuPage")
     public Result<IPage> findStuPage(HttpSession session,
                                      @RequestParam("pageNum") Integer pageNum,
                                      @RequestParam("pageSize") Integer pageSize,
@@ -61,7 +61,7 @@ public class TeacherManageController {
      * @param session
      * @return
      */
-    @GetMapping("/findOtherStu.do")
+    @GetMapping("/findOtherStu")
     public Result selectStudents(HttpSession session){
         List<Student> students = teacherStudentService.getOthersStuByTeacherId((Integer) session.getAttribute("teacherId"));
         return students == null
@@ -74,7 +74,7 @@ public class TeacherManageController {
      * @param student
      * @return
      */
-    @PutMapping("/updateStudent.do")
+    @PutMapping("/updateStudent")
     @Transactional
     public Result update(@RequestBody Student student){
         return studentService.updateById(student)
@@ -88,7 +88,7 @@ public class TeacherManageController {
      * @param session 里面存放了 teacher id
      * @return
      */
-    @PostMapping("/addRelation.do")
+    @PostMapping("/addRelation")
     @Transactional
     public Result addRelation(HttpSession session,
                               @RequestBody TeacherStudent teacherStudent){
@@ -105,7 +105,7 @@ public class TeacherManageController {
      * @param studentId
      * @return
      */
-    @DeleteMapping("/deleteRelation.do/{studentId}")
+    @DeleteMapping("/deleteRelation/{studentId}")
     public Result deleteRelation(HttpSession session,
                                  @PathVariable Integer studentId){
         return teacherStudentService.deleteRelation((Integer) session.getAttribute("teacherId"), studentId)
@@ -119,7 +119,7 @@ public class TeacherManageController {
      * @param studentIds
      * @return
      */
-    @PostMapping("/batchDelRelation.do")
+    @PostMapping("/batchDelRelation")
     public Result batchDeleteRelation(HttpSession session, @RequestBody List<Integer> studentIds){
         return teacherStudentService.deleteBatchRelation((Integer) session.getAttribute("teacherId"),studentIds)
                 ? Result.success()

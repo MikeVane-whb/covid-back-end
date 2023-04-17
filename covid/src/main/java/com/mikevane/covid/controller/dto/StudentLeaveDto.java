@@ -47,21 +47,13 @@ public class StudentLeaveDto {
     @ApiModelProperty("出入校类型")
     private Integer type;
     /**
-     * 省市
-     */
-    @NotBlank(message = "[省市]不能为空")
-    @Size(max = 20, message = "编码长度不能超过20")
-    @ApiModelProperty("省市")
-    @Length(max = 20, message = "编码长度不能超过20")
-    private String province;
-    /**
-     * 区县
+     * 外出地区
      */
     @NotBlank(message = "[区县]不能为空")
     @Size(max = 20, message = "编码长度不能超过20")
     @ApiModelProperty("区县")
     @Length(max = 20, message = "编码长度不能超过20")
-    private String county;
+    private String district;
     /**
      * 外出详细地点
      */

@@ -2,6 +2,7 @@ package com.mikevane.covid.controller.dto;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -12,10 +13,6 @@ import java.util.Date;
 @Data
 public class StudentClockDto {
     /**
-     * id
-     */
-    private Integer id;
-    /**
      * 学生姓名
      */
     private String username;
@@ -24,9 +21,9 @@ public class StudentClockDto {
      */
     private String gradeClass;
     /**
-     * 学生对应的id
+     * 学生学号
      */
-    private Integer studentId;
+    private String stuNumber;
     /**
      * 打卡地点
      */
@@ -38,7 +35,7 @@ public class StudentClockDto {
     /**
      * 出行信息 0去过疫情高风险地区 1没有去过疫情高风险地区
      */
-    private String travelInfo;
+    private Integer travelInfo;
     /**
      * 是否接触疑似或确诊病例 0没有接触过 1接触过
      */
@@ -46,5 +43,5 @@ public class StudentClockDto {
     /**
      * 打卡时间
      */
-    private Date clockTime;
+    private LocalDateTime clockTime;
 }

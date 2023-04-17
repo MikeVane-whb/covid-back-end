@@ -7,7 +7,9 @@ package com.mikevane.covid.entity;
  */
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -16,6 +18,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -28,6 +31,7 @@ public class StudentLeave implements Serializable {
     /**
      * id
      */
+    @TableId(type = IdType.AUTO)
     @NotNull(message = "[]不能为空")
     @ApiModelProperty("id")
     private Integer id;
@@ -62,21 +66,13 @@ public class StudentLeave implements Serializable {
     @ApiModelProperty("出入校类型")
     private Integer type;
     /**
-     * 省市
-     */
-    @NotBlank(message = "[省市]不能为空")
-    @Size(max = 20, message = "编码长度不能超过20")
-    @ApiModelProperty("省市")
-    @Length(max = 20, message = "编码长度不能超过20")
-    private String province;
-    /**
-     * 区县
+     * 外出地区
      */
     @NotBlank(message = "[区县]不能为空")
     @Size(max = 20, message = "编码长度不能超过20")
     @ApiModelProperty("区县")
     @Length(max = 20, message = "编码长度不能超过20")
-    private String county;
+    private String district;
     /**
      * 外出详细地点
      */
@@ -124,6 +120,6 @@ public class StudentLeave implements Serializable {
     @NotNull(message = "[创建时间]不能为空")
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+    private LocalDateTime createTime;
 
 }

@@ -25,7 +25,7 @@ public class TeacherController {
     @Autowired
     public void setTeacherService(TeacherService teacherService) { this.teacherService = teacherService;}
 
-    @GetMapping("/select.do")
+    @GetMapping("/select")
     public Result<TeacherDto> select(HttpSession session){
         TeacherDto teacherDto = new TeacherDto();
         Teacher teacher = teacherService.getById((Integer) session.getAttribute("teacherId"));
@@ -33,7 +33,7 @@ public class TeacherController {
         return teacherDto != null ? Result.success(teacherDto) : Result.error();
     }
 
-    @PutMapping("/update.do")
+    @PutMapping("/update")
     @Transactional
     public Result update(HttpSession session,
                          @RequestBody TeacherDto teacherDto){

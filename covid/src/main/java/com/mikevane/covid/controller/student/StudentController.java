@@ -23,7 +23,7 @@ public class StudentController {
     @Resource
     private StudentService studentService;
 
-    @GetMapping("/select.do")
+    @GetMapping("/select")
     public Result<StudentDto> select(HttpSession session){
         Student student = studentService.getById((Integer) session.getAttribute("studentId"));
         StudentDto studentDto = new StudentDto();
@@ -31,7 +31,7 @@ public class StudentController {
         return Result.success(studentDto);
     }
 
-    @PutMapping("/update.do")
+    @PutMapping("/update")
     public Result<String> update(@RequestBody StudentDto studentDto){
         Student student = new Student();
         BeanUtils.copyProperties(studentDto,student);
@@ -40,14 +40,14 @@ public class StudentController {
                 : Result.error(ErrorCodeEnum.UPDATE_ERROR.getCode(), ErrorCodeEnum.UPDATE_ERROR.getMsg());
     }
 
-    @PutMapping("/updatePassword.do")
+    @PutMapping("/updatePassword")
     public Result<String> updatePassword(HttpSession session, @RequestBody UserRegisterDto userRegisterDto){
         return studentService.updatePassword((Integer) session.getAttribute("studentId"), userRegisterDto)
                 ? Result.success()
                 : Result.error(ErrorCodeEnum.UPDATE_ERROR.getCode(), ErrorCodeEnum.UPDATE_ERROR.getMsg());
     }
 
-    @PutMapping("/updatePhone.do")
+    @PutMapping("/updatePhone")
     public Result<String> updatePhone(HttpSession session, @RequestBody UserRegisterDto userRegisterDto){
         return studentService.updatePhone((Integer) session.getAttribute("studentId"), userRegisterDto)
                 ? Result.success()

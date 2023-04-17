@@ -1,5 +1,7 @@
 package com.mikevane.covid.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.controller.dto.StudentClockDto;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,6 +82,16 @@ public class StudentClockServiceImpl extends ServiceImpl<StudentClockMapper, Stu
             gradeClass = "";
         }
         return studentClockMapper.selectClockStudent(gradeClass);
+    }
+
+    @Override
+    public Page selectPageByStudentId(Integer studentId, Integer pageNum, Integer pageSize) {
+        Page page = this.page(new Page(pageNum, pageSize), new QueryWrapper<StudentClock>().eq("student_id", studentId));
+        List<StudentClock> studentClocks = page.getRecords();
+        List<StudentClockDto> studentClockDtos = new ArrayList<>();
+        ListUtil.copyProperties(studentClocks,studentClockDtos, StudentClockDto.class);
+        page.setRecords(studentClockDtos);
+        return page;
     }
 
 }

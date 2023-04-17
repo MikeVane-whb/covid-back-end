@@ -22,13 +22,13 @@ public class TeacherClockController {
     @Autowired
     private StudentClockService studentClockService;
 
-    @GetMapping("/getGrade.do")
+    @GetMapping("/getGrade")
     public Result selectGrade(){
         List<String> stringList = studentClockService.getGrade();
         return Result.success(stringList);
     }
 
-    @GetMapping("/getStudents.do/{gradeClass}")
+    @GetMapping("/getStudents/{gradeClass}")
     public Result selectStudents(@PathVariable String gradeClass){
         List<TeacherClockDto> students = studentClockService.selectStudentsByGradeClass(gradeClass);
         return Result.success(students);

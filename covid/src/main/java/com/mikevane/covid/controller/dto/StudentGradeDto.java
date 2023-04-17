@@ -31,16 +31,6 @@ public class StudentGradeDto {
     private String username;
 
     /**
-     * 学生邮箱
-     */
-    private String email;
-
-    /**
-     * 学生地址
-     */
-    private String address;
-
-    /**
      * 性别
      */
     private String sex;
@@ -50,4 +40,8 @@ public class StudentGradeDto {
      */
     private String gradeClass;
 
+    /**
+     * 学生手机
+     */
+    private String phone;
 }

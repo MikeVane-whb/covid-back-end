@@ -40,10 +40,18 @@ public class StudentClock implements Serializable {
      * 学生班级
      */
     @NotBlank(message = "[学生班级]不能为空")
-    @Size(max = 10, message = "编码长度不能超过10")
+    @Size(max = 20, message = "编码长度不能超过20")
     @ApiModelProperty("学生班级")
-    @Length(max = 10, message = "编码长度不能超过10")
+    @Length(max = 20, message = "编码长度不能超过20")
     private String gradeClass;
+    /**
+     * 学生学号
+     */
+    @NotBlank(message = "[学生学号]不能为空")
+    @Size(max = 20, message = "编码长度不能超过20")
+    @ApiModelProperty("学生学号")
+    @Length(max = 20, message = "编码长度不能超过20")
+    private String stuNumber;
     /**
      * 学生对应的id
      */
@@ -71,7 +79,7 @@ public class StudentClock implements Serializable {
     @Size(max = 30, message = "编码长度不能超过30")
     @ApiModelProperty("出行信息 0去过疫情高风险地区 1没有去过疫情高风险地区")
     @Length(max = 30, message = "编码长度不能超过30")
-    private String travelInfo;
+    private Integer travelInfo;
     /**
      * 是否接触疑似或确诊病例 0没有接触过 1接触过
      */

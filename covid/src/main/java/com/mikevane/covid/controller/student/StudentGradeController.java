@@ -24,7 +24,7 @@ public class StudentGradeController {
     @Resource
     private StudentService studentService;
 
-    @GetMapping("/select.do")
+    @GetMapping("/select")
     public Result<IPage> select(@RequestParam("pageNum") Integer pageNum,
                                                 @RequestParam("pageSize") Integer pageSize,
                                                 @RequestParam(required = false) String studentName,
