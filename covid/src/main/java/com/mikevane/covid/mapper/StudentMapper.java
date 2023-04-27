@@ -37,6 +37,13 @@ public interface StudentMapper extends BaseMapper<Student> {
      * @return
      */
     int updatePhoneById(@Param("studentId") Integer studentId, @Param("phone")String phone);
+
+    /**
+     * 根据 学生id 更新手机号
+     * @param studentIds
+     * @return
+     */
+    Integer updateGradeClass(List<Integer> studentIds);
 }
 
 

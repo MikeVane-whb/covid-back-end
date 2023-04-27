@@ -5,12 +5,15 @@ import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.StudentDto;
 import com.mikevane.covid.controller.dto.UserRegisterDto;
 import com.mikevane.covid.entity.Student;
+import com.mikevane.covid.entity.TeacherGrade;
 import com.mikevane.covid.service.StudentService;
+import com.mikevane.covid.service.TeacherGradeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author: whb
@@ -22,6 +25,8 @@ import javax.servlet.http.HttpSession;
 public class StudentController {
     @Resource
     private StudentService studentService;
+    @Resource
+    private TeacherGradeService teacherGradeService;
 
     @GetMapping("/select")
     public Result<StudentDto> select(HttpSession session){
@@ -29,6 +34,12 @@ public class StudentController {
         StudentDto studentDto = new StudentDto();
         BeanUtils.copyProperties(student,studentDto);
         return Result.success(studentDto);
+    }
+
+    @GetMapping("/selectGrade")
+    public Result<List> selectGrade(){
+        List<TeacherGrade> teacherGrades = teacherGradeService.list();
+        return Result.success(teacherGrades);
     }
 
     @PutMapping("/update")

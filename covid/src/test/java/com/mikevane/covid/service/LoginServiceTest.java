@@ -6,7 +6,6 @@ import com.mikevane.covid.entity.Teacher;
 import com.mikevane.covid.entity.User;
 import com.mikevane.covid.mapper.StudentMapper;
 import com.mikevane.covid.mapper.TeacherMapper;
-import com.mikevane.covid.mapper.TeacherStudentMapper;
 import com.mikevane.covid.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -28,8 +27,6 @@ public class LoginServiceTest {
     private StudentMapper studentMapper;
     @Autowired
     private TeacherMapper teacherMapper;
-    @Autowired
-    private TeacherStudentMapper teacherStudentMapper;
 
     @Test
     public void registerTest(){

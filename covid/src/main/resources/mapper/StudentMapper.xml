@@ -28,13 +28,23 @@
                 WHERE
                     id = #{studentId})
     </update>
+
     <update id="updatePhoneById">
         UPDATE `user`,`student`
         SET USER.phone = #{phone},
             student.phone = #{phone}
         WHERE
             USER.id = student.user_id
-            AND student.id = 7
+            AND student.id = #{studentId}
+    </update>
+
+    <update id="updateGradeClass">
+        UPDATE student
+        SET grade_class = ''
+        WHERE id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 
     <select id="selectDistinctGrades" resultType="java.lang.String">

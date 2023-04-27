@@ -41,6 +41,14 @@ public class StudentLeaveDto {
     @Length(max = 255, message = "编码长度不能超过255")
     private String college;
     /**
+     * 班级
+     */
+    @NotBlank(message = "[班级]不能为空")
+    @Size(max = 20, message = "编码长度不能超过20")
+    @ApiModelProperty("班级")
+    @Length(max = 20, message = "编码长度不能超过20")
+    private String gradeClass;
+    /**
      * 出入校类型
      */
     @NotNull(message = "[出入校类型]不能为空")

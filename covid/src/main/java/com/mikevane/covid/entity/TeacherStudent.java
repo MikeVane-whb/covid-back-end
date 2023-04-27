@@ -15,18 +15,18 @@ import java.time.LocalDateTime;
 @Data
 public class TeacherStudent implements Serializable {
     /**
-     * 
+     * id
      */
     @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 
+     * 老师 id
      */
     private Integer teacherId;
 
     /**
-     *
+     * 学生 id
      */
     private Integer studentId;
 
