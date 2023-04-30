@@ -1,6 +1,8 @@
 package com.mikevane.covid.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import com.mikevane.covid.entity.StudentLeave;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +25,11 @@ public class StudentLeaveServiceTest {
     public void getRecordsByStudentIdTest(){
         Page studentLeaveDtos = studentLeaveService.getRecordsByStudentId(7,1,1);
         log.info(Arrays.toString(new List[]{studentLeaveDtos.getRecords()}));
+    }
+
+    @Test
+    public void getPendApprovalTest(){
+        Page<StudentLeave> pendApproval = studentLeaveService.getPendApproval(8, 1, 5, "whb", null);
+        log.info(Arrays.toString(new List[]{pendApproval.getRecords()}));
     }
 }

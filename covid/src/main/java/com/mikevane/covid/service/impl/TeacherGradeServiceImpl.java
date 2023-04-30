@@ -80,8 +80,8 @@ public class TeacherGradeServiceImpl extends ServiceImpl<TeacherGradeMapper, Tea
     public Page<Student> getStuPage(Integer teacherId, Integer pageNum, Integer pageSize, String studentName, String gradeClass) {
         Page page = new Page(pageNum,pageSize);
         page.setTotal(this.teacherGradeMapper.selectStuCount(teacherId,studentName,gradeClass).size());
-        List<Student> teacherGradeDtos = teacherGradeMapper.selectStuPage(teacherId, (Integer)(pageNum - 1)*pageSize, pageSize, studentName ,gradeClass);
-        page.setRecords(teacherGradeDtos);
+        List<Student> students = teacherGradeMapper.selectStuPage(teacherId, (Integer)(pageNum - 1)*pageSize, pageSize, studentName ,gradeClass);
+        page.setRecords(students);
         return page;
     }
 

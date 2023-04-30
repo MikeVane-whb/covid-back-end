@@ -3,7 +3,7 @@ package com.mikevane.covid.controller.student;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.common.Result;
-import com.mikevane.covid.controller.dto.StudentLeaveDto;
+
 import com.mikevane.covid.entity.StudentLeave;
 import com.mikevane.covid.service.StudentLeaveService;
 import org.springframework.beans.factory.annotation.Autowired;

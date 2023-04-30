@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mikevane.covid.mapper.StudentLeaveMapper">
+
+    <select id="selectPendApprovalId" resultType="java.lang.Integer">
+        SELECT
+            id
+        FROM
+            student_leave
+        <where>
+            grade_class in (select grade_class from teacher_grade where teacher_id = #{teacherId})
+            and status = 0
+            <if test="studentName!=null">
+                and username like concat('%',#{studentName},'%')
+            </if>
+            <if test="gradeClass!=null">
+                and grade_class like concat('%',#{gradeClass},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPendApprovalStudent" resultType="com.mikevane.covid.entity.StudentLeave">
+        SELECT
+        *
+        FROM
+        student_leave
+        <where>
+            grade_class in (select grade_class from teacher_grade where teacher_id = #{teacherId})
+            and status = 0
+            <if test="studentName!=null">
+                and username like concat('%',#{studentName},'%')
+            </if>
+            <if test="gradeClass!=null">
+                and grade_class like concat('%',#{gradeClass},'%')
+            </if>
+        </where>
+        LIMIT #{currIndex},#{pageSize}
+    </select>
+
+    <select id="selectApprovedId" resultType="java.lang.Integer">
+        SELECT
+        id
+        FROM
+        student_leave
+        <where>
+            grade_class in (select grade_class from teacher_grade where teacher_id = #{teacherId})
+            and status != 0
+            <if test="studentName!=null">
+                and username like concat('%',#{studentName},'%')
+            </if>
+            <if test="gradeClass!=null">
+                and grade_class like concat('%',#{gradeClass},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectApprovedStudent" resultType="com.mikevane.covid.entity.StudentLeave">
+        SELECT
+        *
+        FROM
+        student_leave
+        <where>
+            grade_class in (select grade_class from teacher_grade where teacher_id = #{teacherId})
+            and status != 0
+            <if test="studentName!=null">
+                and username like concat('%',#{studentName},'%')
+            </if>
+            <if test="gradeClass!=null">
+                and grade_class like concat('%',#{gradeClass},'%')
+            </if>
+        </where>
+        LIMIT #{currIndex},#{pageSize}
+    </select>
+</mapper>

@@ -1,5 +1,6 @@
 package com.mikevane.covid.controller.student;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mikevane.covid.common.ErrorCodeEnum;
 import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.StudentDto;
@@ -38,7 +39,7 @@ public class StudentController {
 
     @GetMapping("/selectGrade")
     public Result<List> selectGrade(){
-        List<TeacherGrade> teacherGrades = teacherGradeService.list();
+        List<TeacherGrade> teacherGrades = teacherGradeService.list(new QueryWrapper<TeacherGrade>().orderBy(true,true,"grade_class"));
         return Result.success(teacherGrades);
     }
 

@@ -1,6 +1,6 @@
 package com.mikevane.covid.utils;
 
-import com.mikevane.covid.controller.dto.StudentLeaveDto;
+
 import com.mikevane.covid.entity.StudentLeave;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -24,8 +24,5 @@ public class ListUtilTest {
         StudentLeave studentLeave = new StudentLeave();
         studentLeave.setUsername("123");
         list1.add(studentLeave);
-        List<StudentLeaveDto> list2 = new ArrayList<>();
-        ListUtil.copyProperties(list1,list2, StudentLeaveDto.class);
-        log.info(Arrays.toString(new List[]{list2}));
     }
 }

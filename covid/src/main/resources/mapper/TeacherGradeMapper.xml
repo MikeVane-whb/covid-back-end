@@ -12,11 +12,6 @@
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id,teacher_id,grade_class,
-        create_time,update_time
-    </sql>
-
     <select id="selectGradeByTeacherId" resultType="java.lang.String">
         select grade_class from teacher_grade
         <where>
@@ -40,7 +35,7 @@
                 tg.teacher_id = #{teacherId}
             </if>
             <if test="gradeClass != null">
-                and grade_class like concat('%',#{gradeClass},'%')
+                and tg.grade_class like concat('%',#{gradeClass},'%')
             </if>
         </where>
         GROUP BY tg.grade_class

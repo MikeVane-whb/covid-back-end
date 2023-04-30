@@ -1,8 +1,8 @@
 package com.mikevane.covid.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.mikevane.covid.controller.dto.StudentLeaveDto;
 import com.mikevane.covid.entity.StudentLeave;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public interface StudentLeaveService extends IService<StudentLeave> {
 
     /**
-     * 通过学生 id 获取前几次的打卡记录
+     * 通过学生 id 获取前几次的申请记录
      * @param studentId
      * @param pageNum
      * @param pageSize
@@ -30,4 +30,26 @@ public interface StudentLeaveService extends IService<StudentLeave> {
      * @return
      */
     boolean saveRecordByStudentId(Integer studentId, StudentLeave studentLeave);
+
+    /**
+     * 分页查询未审批的学生
+     * @param teacherId
+     * @param pageNum
+     * @param pageSize
+     * @param studentName
+     * @param gradeClass
+     * @return
+     */
+    Page<StudentLeave> getPendApproval(Integer teacherId, Integer pageNum, Integer pageSize, String studentName, String gradeClass);
+
+    /**
+     * 分页查询已审批的学生
+     * @param teacherId
+     * @param pageNum
+     * @param pageSize
+     * @param studentName
+     * @param gradeClass
+     * @return
+     */
+    IPage<StudentLeave> getApproved(Integer teacherId, Integer pageNum, Integer pageSize, String studentName, String gradeClass);
 }
