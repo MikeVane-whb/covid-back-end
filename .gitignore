@@ -1,6 +1,6 @@
 /.idea/libraries/Maven__com_google_guava_guava_20_0.xml
 /target/
-.idea
+.idea/
 *.iml
 .tags
 .tags_sorted_by_file
