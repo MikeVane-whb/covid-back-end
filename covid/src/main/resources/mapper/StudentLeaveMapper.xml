@@ -59,7 +59,7 @@
         *
         FROM
         student_leave
-        <where>
+        WHERE
             grade_class in (select grade_class from teacher_grade where teacher_id = #{teacherId})
             and status != 0
             <if test="studentName!=null">
@@ -68,7 +68,7 @@
             <if test="gradeClass!=null">
                 and grade_class like concat('%',#{gradeClass},'%')
             </if>
-        </where>
+        order by id desc
         LIMIT #{currIndex},#{pageSize}
     </select>
 </mapper>

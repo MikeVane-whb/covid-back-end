@@ -38,6 +38,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if(StringUtil.isNull(token)){
             throw new ServiceException(ErrorCodeEnum.NULL_TOKEN.getCode(), ErrorCodeEnum.NULL_TOKEN.getMsg());
         }
+        log.info("***********token***********"+token);
         // 获取 token 中的 userid
         String userId;
         try{

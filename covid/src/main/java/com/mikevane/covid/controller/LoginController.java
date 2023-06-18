@@ -6,6 +6,7 @@ import com.mikevane.covid.common.Result;
 import com.mikevane.covid.controller.dto.UserDto;
 import com.mikevane.covid.controller.dto.UserRegisterDto;
 import com.mikevane.covid.service.UserService;
+import com.mikevane.covid.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,9 +48,9 @@ public class LoginController {
         if(!reUser.getPassword().equals(reUser.getRePassword())){
             return Result.error(ErrorCodeEnum.ILLEGAL_ERROR.getCode(), ErrorCodeEnum.ILLEGAL_ERROR.getMsg());
         }
-//        if(!StringUtil.isValidPhoneNumber(reUser.getPhone())){
-//            return Result.error(ErrorCodeEnum.ILLEGAL_ERROR.getCode(), ErrorCodeEnum.ILLEGAL_ERROR.getMsg());
-//        }
+        if(!StringUtil.isValidPhoneNumber(reUser.getPhone())){
+            return Result.error(ErrorCodeEnum.ILLEGAL_ERROR.getCode(), "手机格式错误");
+        }
         Object register = userService.register(reUser);
         // 注册失败，发送错误信息
         if(register == null){

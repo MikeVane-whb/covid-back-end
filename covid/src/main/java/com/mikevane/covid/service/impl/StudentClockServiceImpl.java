@@ -86,7 +86,7 @@ public class StudentClockServiceImpl extends ServiceImpl<StudentClockMapper, Stu
 
     @Override
     public Page selectPageByStudentId(Integer studentId, Integer pageNum, Integer pageSize) {
-        Page page = this.page(new Page(pageNum, pageSize), new QueryWrapper<StudentClock>().eq("student_id", studentId));
+        Page page = this.page(new Page(pageNum, pageSize), new QueryWrapper<StudentClock>().eq("student_id", studentId).orderByDesc("id"));
         List<StudentClock> studentClocks = page.getRecords();
         if (studentClocks == null || studentClocks.size() == 0){
             throw new ServiceException(ErrorCodeEnum.SELECT_ERROR.getCode(), "打卡记录为空");
