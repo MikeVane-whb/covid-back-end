@@ -1,10 +1,7 @@
 package com.mikevane.covid.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mikevane.covid.controller.dto.StudentClockDto;
-import com.mikevane.covid.controller.dto.TeacherClockDto;
 import com.mikevane.covid.entity.Student;
-import com.mikevane.covid.entity.StudentClock;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -40,6 +37,13 @@ public interface StudentMapper extends BaseMapper<Student> {
      * @return
      */
     int updatePhoneById(@Param("studentId") Integer studentId, @Param("phone")String phone);
+
+    /**
+     * 根据 学生id 更新手机号
+     * @param studentIds
+     * @return
+     */
+    Integer updateGradeClass(List<Integer> studentIds);
 }
 
 

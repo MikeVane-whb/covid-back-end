@@ -26,21 +26,44 @@ public class Teacher implements Serializable {
     private String username;
 
     /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 出生日期
+     */
+    private Date birthday;
+
+    /**
      * 性别
      */
     private String sex;
 
     /**
-     * 老师邮箱
+     * 民族
      */
-    private String email;
+    private String nation;
 
     /**
-     * 老师地址
+     * 入职时间
      */
-    private String address;
+    private Date startDate;
 
+    /**
+     * 专业
+     */
+    private String major;
 
+    /**
+     * 学院
+     */
+    private String college;
 
     /**
      * 老师的 userId

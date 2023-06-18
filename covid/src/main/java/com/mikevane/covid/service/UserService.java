@@ -5,10 +5,7 @@ import com.mikevane.covid.controller.dto.UserDto;
 import com.mikevane.covid.controller.dto.UserRegisterDto;
 import com.mikevane.covid.entity.User;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 public interface UserService extends IService<User> {
     /**

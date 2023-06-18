@@ -1,6 +1,6 @@
 package com.mikevane.covid.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mikevane.covid.controller.dto.StudentClockDto;
 import com.mikevane.covid.controller.dto.TeacherClockDto;
@@ -41,4 +41,13 @@ public interface StudentClockService extends IService<StudentClock> {
      * @return
      */
     List<TeacherClockDto> selectStudentsByGradeClass(String gradeClass);
+
+    /**
+     * 通过 学生id 进行分页查询
+     * @param studentId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    Page selectPageByStudentId(Integer studentId,Integer pageNum, Integer pageSize);
 }

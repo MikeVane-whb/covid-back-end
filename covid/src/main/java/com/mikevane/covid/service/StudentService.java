@@ -2,7 +2,6 @@ package com.mikevane.covid.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.mikevane.covid.controller.dto.StudentGradeDto;
 import com.mikevane.covid.controller.dto.UserRegisterDto;
 import com.mikevane.covid.entity.Student;
 

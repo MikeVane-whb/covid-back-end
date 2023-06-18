@@ -50,6 +50,11 @@ public enum ErrorCodeEnum {
      */
     PHONE_IS_EXIST("1009","手机已存在"),
 
+    /**
+     * 班级号已存在错误
+     */
+    GRADE_CLASS_IS_EXIST("1010","班级号已存在"),
+
     //**********************权限错误*****************************
     /**
      * 无 token 错误
@@ -91,7 +96,7 @@ public enum ErrorCodeEnum {
     }
 
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return "ErrorCodeEnum{" + "code='" + code + '\'' + ", msg='" + msg + '\'' + '}';
     }
 }

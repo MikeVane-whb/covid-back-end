@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * 
@@ -16,18 +15,18 @@ import java.util.Date;
 @Data
 public class TeacherStudent implements Serializable {
     /**
-     * 
+     * id
      */
     @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 
+     * 老师 id
      */
     private Integer teacherId;
 
     /**
-     *
+     * 学生 id
      */
     private Integer studentId;
 

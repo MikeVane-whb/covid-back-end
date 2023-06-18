@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mikevane.covid.mapper.TeacherGradeMapper">
+
+    <resultMap id="BaseResultMap" type="com.mikevane.covid.entity.TeacherGrade">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+            <result property="gradeClass" column="grade_class" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectGradeByTeacherId" resultType="java.lang.String">
+        select grade_class from teacher_grade
+        <where>
+            <if test="teacherId != null">
+                and teacher_id = #{teacherId}
+            </if>
+            <if test="gradeClass != null">
+                and grade_class like concat('%',#{gradeClass},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectGradeDtoPage" resultType="com.mikevane.covid.controller.dto.TeacherGradeDto">
+        SELECT
+            tg.grade_class,count(s.grade_class) count
+        FROM
+            teacher_grade tg
+        LEFT JOIN student s ON tg.grade_class = s.grade_class
+        <where>
+            <if test="teacherId != null">
+                tg.teacher_id = #{teacherId}
+            </if>
+            <if test="gradeClass != null">
+                and tg.grade_class like concat('%',#{gradeClass},'%')
+            </if>
+        </where>
+        GROUP BY tg.grade_class
+        LIMIT #{currIndex},#{pageSize}
+    </select>
+
+    <select id="selectStuCount" resultType="java.lang.Integer">
+        SELECT s.id
+        FROM student s
+                 JOIN teacher_grade tg ON tg.grade_class = s.grade_class
+        <where>
+            <if test="teacherId != null">
+                and tg.teacher_id = #{teacherId}
+            </if>
+            <if test="studentName != null">
+                and s.username like concat('%',#{studentName},'%')
+            </if>
+            <if test="gradeClass != null">
+                and tg.grade_class like concat('%',#{gradeClass},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectStuPage" resultType="com.mikevane.covid.entity.Student">
+        SELECT s.*
+        FROM student s
+        JOIN teacher_grade tg ON tg.grade_class = s.grade_class
+        <where>
+            <if test="teacherId != null">
+                and tg.teacher_id = #{teacherId}
+            </if>
+            <if test="studentName != null">
+                and s.username like concat('%',#{studentName},'%')
+            </if>
+            <if test="gradeClass != null">
+                and tg.grade_class like concat('%',#{gradeClass},'%')
+            </if>
+        </where>
+        LIMIT #{currIndex},#{pageSize}
+    </select>
+
+    <select id="selectOtherStu" resultType="com.mikevane.covid.entity.Student">
+        SELECT
+            *
+        FROM
+            student
+        WHERE
+                grade_class NOT IN (
+                SELECT
+                    grade_class
+                FROM
+                    teacher_grade
+                WHERE
+                    teacher_id = #{teacherId})
+    </select>
+
+
+</mapper>

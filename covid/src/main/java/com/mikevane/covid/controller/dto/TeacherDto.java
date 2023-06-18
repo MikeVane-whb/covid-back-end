@@ -1,6 +1,14 @@
 package com.mikevane.covid.controller.dto;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author: whb
@@ -10,19 +18,58 @@ import lombok.Data;
 @Data
 public class TeacherDto {
     /**
+     * id
+     */
+    private Integer id;
+
+    /**
      * 老师姓名
      */
     private String username;
+
     /**
-     * 老师性别
+     * 手机号
      */
-    private String sex;
+    private String phone;
+
     /**
-     * 老师邮箱
+     * 邮箱
      */
     private String email;
+
     /**
-     * 老师地址
+     * 出生日期
      */
-    private String address;
+    private Date birthday;
+
+    /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * 民族
+     */
+    private String nation;
+
+    /**
+     * 入职时间
+     */
+    private Date startDate;
+
+    /**
+     * 专业
+     */
+    private String major;
+
+    /**
+     * 学院
+     */
+    private String college;
+
+    /**
+     * 老师的 userId
+     */
+    private Integer userId;
+
 }
