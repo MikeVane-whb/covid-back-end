@@ -6,9 +6,9 @@
 
 下面开始介绍本项目，该项目是本人基于校园疫情开发的**疫情管理系统**，本项目为**前后端分离**项目，项目技术为：`SpringBoot、MyBatis-Plus、JWT、Vue`以及其他技术。本项目主要面向用户群体为学生与教师，后续可能会添加管理员等其他用户。
 
-- > 前端入口：
+- > 前端入口：https://github.com/MikeVane-whb/covid-front-end
 
-- > 后端入口：
+- > 后端入口：https://github.com/MikeVane-whb/covid-back-end
 
 ---
 
